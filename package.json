@@ -1,0 +1,30 @@
+{
+  "name": "PWABarcodeScanner",
+  "version": "1.0.0",
+  "description": "pwa barcode scanner in Nuxt.js",
+  "author": "Eulier Arturo G.M.",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.3.4",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^2.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "autoprefixer": "^8.6.4",
+    "tailwindcss": "^0.7.0",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "vue-jest": "^3.0.2"
+  }
+}
