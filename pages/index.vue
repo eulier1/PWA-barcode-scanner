@@ -27,29 +27,46 @@
       </defs>
     </svg>
     <h4 class="description text-grey-light">Scan a barcode to get nutritional food value</h4>
+    <button class="relative z-50" type="button" id="capture-btn" @click="capture($event)">Capture</button>
+    <input class="relative z-50" type="file" accept="image/*" id="image-picker" ref="image-picker">
     <div class="camera">
-      <video id="player" ref="player" autoplay></video>
-      <!-- <canvas id="canvas" ref="canvas" width="320px" height="240px"></canvas>
-      <button id="capture-btn" @click="capture($event)">Capture</button>
-      <input type="file" accept="image/*" id="image-picker" ref="image-picker">-->
+      <video id="player" ref="player" autoplay :class="{'hidden': isSnapshot}"></video>
+      <canvas id="canvas" ref="canvas" :class="{'hidden': !isSnapshot}"></canvas>
     </div>
   </section>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
 import { MEDIA } from "../mixins/Media";
 
 export default {
-  mixins: [MEDIA],
-  components: {
-    Logo
+  data() {
+    return {
+      isSnapshot: false
+    };
   },
+  mixins: [MEDIA],
   mounted() {
     this.initializeMedia(this.$refs.player);
   },
   methods: {
-    capture(ev) {}
+    capture(ev) {
+      this.isSnapshot = true;
+      let canvas = this.$refs.canvas;
+      let context = this.$refs.canvas.getContext("2d");
+      let videoPlayer = this.$refs.player;
+      context.drawImage(
+        videoPlayer,
+        0,
+        0,
+        canvas.width,
+        videoPlayer.videoHeight / (videoPlayer.videoWidth / canvas.width)
+      );
+      videoPlayer.srcObject.getVideotracks().forEach(track => {
+        track.stop();
+      });
+      console.log(context);
+    }
   }
 };
 </script>
@@ -102,6 +119,12 @@ export default {
 }
 
 video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
   position: absolute;
   width: 100%;
   height: 100%;
