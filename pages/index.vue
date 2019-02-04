@@ -29,9 +29,13 @@
     <h4 class="description text-grey-light">Scan a barcode to get nutritional food value</h4>
     <button class="relative z-50" type="button" id="capture-btn" @click="capture($event)">Capture</button>
     <input class="relative z-50" type="file" accept="image/*" id="image-picker" ref="image-picker">
-    <div class="camera">
+    <div class="camera-wrapper" ref="camera">
       <video id="player" ref="player" autoplay :class="{'hidden': isSnapshot}"></video>
-      <canvas id="canvas" ref="canvas" :class="{'hidden': !isSnapshot}"></canvas>
+      <canvas
+        id="canvas"
+        ref="canvas"
+        :class="{'hidden': !isSnapshot, 'snapshot': isSnapshotTaken}"
+      ></canvas>
     </div>
   </section>
 </template>
@@ -42,7 +46,8 @@ import { MEDIA } from "../mixins/Media";
 export default {
   data() {
     return {
-      isSnapshot: false
+      isSnapshot: false,
+      isSnapshotTaken: false
     };
   },
   mixins: [MEDIA],
@@ -55,16 +60,12 @@ export default {
       let canvas = this.$refs.canvas;
       let context = this.$refs.canvas.getContext("2d");
       let videoPlayer = this.$refs.player;
-      context.drawImage(
-        videoPlayer,
-        0,
-        0,
-        canvas.width,
-        videoPlayer.videoHeight / (videoPlayer.videoWidth / canvas.width)
-      );
-      videoPlayer.srcObject.getVideotracks().forEach(track => {
+      //console.log(videoPlayer.videoHeight, videoPlayer.videoWidth);
+      context.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
+      videoPlayer.srcObject.getVideoTracks().forEach(track => {
         track.stop();
       });
+      this.isSnapshotTaken = true;
       console.log(context);
     }
   }
@@ -72,12 +73,6 @@ export default {
 </script>
 
 <style scoped>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-
 .bg-landingpage {
   /* Rectangle */
   width: 100vw;
@@ -105,11 +100,12 @@ export default {
   z-index: 1;
 }
 
-.camera {
+.camera-wrapper {
   /* Rectangle */
   position: absolute;
   width: 100vw;
   height: 100vh;
+  margin: auto;
   left: 0;
   top: 0;
 
@@ -120,14 +116,34 @@ export default {
 
 video {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
 }
 
 canvas {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 75vw;
+  height: 75vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.snapshot {
+  animation: snapshot 0.3s, 0s, ease-out, forwards;
+}
+
+@keyframes snapshot {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .title {
