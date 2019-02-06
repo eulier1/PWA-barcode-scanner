@@ -12,17 +12,22 @@
       fill="url(#paint0_linear)"
     ></path>
     <defs>
-      <linearGradient
-        id="paint0_linear"
-        x1="-46"
-        y1="8.99999"
-        x2="654.938"
-        y2="9.00002"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="#F27A54"></stop>
-        <stop offset="1" stop-color="#A154F2"></stop>
-      </linearGradient>
+      <defs>
+        <linearGradient
+          id="paint0_linear"
+          x1="81.5"
+          y1="40.3739"
+          x2="81.5"
+          y2="8.13383e-06"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#71CF6F"></stop>
+          <stop offset="1" stop-color="#69EA66"></stop>
+        </linearGradient>
+      </defs>
+      <clipPath id="clip0">
+        <rect width="163" height="41" fill="white" transform="translate(163 41) rotate(-180)"></rect>
+      </clipPath>
     </defs>
   </svg>
 </template>

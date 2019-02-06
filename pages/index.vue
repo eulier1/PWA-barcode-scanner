@@ -24,7 +24,10 @@
         </div>
       </div>
 
-      <h4 class="description text-grey-light px-4">Scan a barcode to get nutritional food value</h4>
+      <h4
+        v-if="!showError"
+        class="description text-grey-light px-4"
+      >Scan a barcode to get nutritional food value</h4>
 
       <input
         class="relative z-50 hidden"
@@ -101,14 +104,13 @@ export default {
       let videoPlayer = this.$refs.player;
       context.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
       //videoPlayer.srcObject.getVideoTracks().forEach(track => {});
-      //this.generateBarcode(canvas.toDataURL("image/jpeg", 1));
-      this.isSnapshotTaken = true;
-      this.goToProduct("3700279305420");
+      this.generateBarcode(canvas.toDataURL("image/jpeg", 1));
+      //this.goToProduct(); //"3700279305420"
     },
     generateBarcode(dataURIjpg) {
       let self = this;
       dataURIjpg = dataURIjpg.replace("image/jpeg", "image/jpg");
-      console.log("dataURIjpg", dataURIjpg);
+      //console.log("dataURIjpg", dataURIjpg);
       Quagga.decodeSingle(
         {
           numOfWorkers: 0, // Needs to be 0 when used within node
@@ -128,8 +130,8 @@ export default {
             );
           }
           if (result.codeResult) {
-            console.log("result", result.codeResult.code);
-            self.goToProduct("3700279305420", self);
+            this.isSnapshotTaken = true;
+            self.goToProduct(result.codeResult.code, self);
           } else {
             self.initialState();
             self.displayErrorAlert(
@@ -167,6 +169,10 @@ export default {
 </script>
 
 <style scoped>
+main {
+  background-color: #f3f3f3;
+}
+
 .btn-camera {
   position: fixed !important;
   top: 80vh;

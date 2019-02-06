@@ -54,7 +54,7 @@
         fill="#BCB7B7"
       ></path>
     </svg>
-    <h4>Please activate it, to start scanning</h4>
+    <h4>Please activate it, to start scanning.</h4>
     <button
       class="bg-blue hover:bg-blue-light text-white font-bold py-2 px-4 border-b-4 border-blue-dark hover:border-blue rounded"
       @click="$emit('activate-camera')"
@@ -79,6 +79,10 @@ export default {
 </script>
 
 <style>
+h4 {
+  color: #555;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;

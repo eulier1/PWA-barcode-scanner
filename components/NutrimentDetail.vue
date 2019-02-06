@@ -4,26 +4,6 @@
       class="bg-image"
       :style="{background: 'linear-gradient(180deg, rgba(49, 50, 79, 0.17) 0%, #242539 100%), url(' + nutriment.image_front_url + ')'}"
     ></div>
-    <!-- <div class="max-w rounded overflow-hidden shadow-lg">
-
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-        <p
-          class="text-grey-darker text-base"
-        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
-      </div>
-      <div class="px-6 py-4">
-        <span
-          class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2"
-        >#photography</span>
-        <span
-          class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2"
-        >#travel</span>
-        <span
-          class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker"
-        >#winter</span>
-      </div>
-    </div>-->
     <h2 class="nutriment-name text-grey-light">{{nutriment.product_name}}</h2>
     <div class="nutriment-list">
       <h4 class="text-grey-light pt-3">Nutrients per 100gr</h4>

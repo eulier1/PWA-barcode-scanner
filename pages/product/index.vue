@@ -24,7 +24,14 @@ export default {
   data() {
     return {
       product: {},
-      nutriments: {}
+      nutriments: {
+        product_name: "",
+        image_front_url: "",
+        nutrients: "",
+        allergers: "",
+        vitamins: "",
+        minerals: ""
+      }
     };
   },
   mounted() {
@@ -35,11 +42,6 @@ export default {
     this.nutriment.allergers = this.$store.getters.getAllergens;
     this.nutriment.vitamins = this.$store.getters.getVitamins;
     this.nutriment.minerals = this.$store.getters.getMinerals;
-  },
-  methods: {
-    test(ev) {
-      console.log(ev);
-    }
   }
 };
 </script>
