@@ -1,6 +1,9 @@
 <template>
   <section class="absolute pin-x pin-t z-index-minus100">
-    <div class="bg-image" :style="bg"></div>
+    <div
+      class="bg-image"
+      :style="{background: 'linear-gradient(180deg, rgba(49, 50, 79, 0.17) 0%, #242539 100%), url(' + nutriment.image_front_url + ')'}"
+    ></div>
     <!-- <div class="max-w rounded overflow-hidden shadow-lg">
 
       <div class="px-6 py-4">
@@ -21,12 +24,12 @@
         >#winter</span>
       </div>
     </div>-->
-    <h2 class="product-name text-grey-light">{{product.product_name}}</h2>
+    <h2 class="nutriment-name text-grey-light">{{nutriment.product_name}}</h2>
     <div class="nutriment-list">
       <h4 class="text-grey-light pt-3">Nutrients per 100gr</h4>
       <div class="flex flex-wrap pt-3 text-grey-light fontsize">
         <div
-          v-for=" (nutrient, index) in nutrients"
+          v-for=" (nutrient, index) in nutriment.nutrients"
           :key="index+100"
           class="w-1/2 flex justify-between paddingNutrient"
         >
@@ -40,17 +43,21 @@
 
     <div class="text-justify pt-5 pl-4">
       <h4 class="text-left">Allergens</h4>
-      <p class="p-2 leading-normal" v-for="(allergen, index) in allergers" :key="index+200">
-        <span v-if="allergers.length > 0">{{allergen}}</span>
+      <p
+        class="p-2 leading-normal"
+        v-for="(allergen, index) in nutriment.allergers"
+        :key="index+200"
+      >
+        <span v-if="nutriment.allergers.length > 0">{{allergen}}</span>
         <span v-else>Free of known allergens</span>
       </p>
-      <h4 v-if="vitamins.length > 0" class="text-left pt-3">Vitamins</h4>
-      <p class="p-2 leading-normal" v-for="(vitamin, index) in vitamins" :key="index+300">
+      <h4 v-if="nutriment.vitamins.length > 0" class="text-left pt-3">Vitamins</h4>
+      <p class="p-2 leading-normal" v-for="(vitamin, index) in nutriment.vitamins" :key="index+300">
         <span>{{vitamin}}</span>
       </p>
 
-      <h4 v-if="minerals.length > 0" class="text-left pt-3">Minerals</h4>
-      <p class="p-2 leading-normal" v-for="(mineral, index) in minerals" :key="index+400">
+      <h4 v-if="nutriment.minerals.length > 0" class="text-left pt-3">Minerals</h4>
+      <p class="p-2 leading-normal" v-for="(mineral, index) in nutriment.minerals" :key="index+400">
         <span>{{mineral}}</span>
       </p>
     </div>
@@ -59,26 +66,7 @@
 
 <script>
 export default {
-  props: ["product"],
-  data() {
-    return {
-      bg: {
-        background: `linear-gradient(180deg, rgba(49, 50, 79, 0.17) 0%, #242539 100%), url(${
-          this.product.image_front_url
-        })`
-      },
-      nutrients: [],
-      allergers: [],
-      vitamins: [],
-      minerals: []
-    };
-  },
-  mounted() {
-    this.nutrients = this.$store.getters.getNutrientsBy100g;
-    this.allergers = this.$store.getters.getAllergens;
-    this.vitamins = this.$store.getters.getVitamins;
-    this.minerals = this.$store.getters.getMinerals;
-  }
+  props: ["nutriment"]
 };
 </script>
 
@@ -88,7 +76,7 @@ export default {
   z-index: -100;
 }
 
-.product-name {
+.nutriment-name {
   position: absolute;
   z-index: 10;
   top: 7rem;

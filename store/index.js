@@ -1,7 +1,7 @@
 export const state = () => ({
-  product: {},
-  vitamins: [],
-  minerals: []
+  product: null,
+  vitamins: null,
+  minerals: null
 });
 
 export const mutations = {
