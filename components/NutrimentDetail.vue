@@ -1,6 +1,6 @@
 <template>
   <section class="absolute pin-x pin-t z-index-minus100">
-    <div class="bg-image"></div>
+    <div class="bg-image" :style="bg"></div>
     <!-- <div class="max-w rounded overflow-hidden shadow-lg">
 
       <div class="px-6 py-4">
@@ -21,31 +21,67 @@
         >#winter</span>
       </div>
     </div>-->
-    <h2 class="product-name text-grey-light">Product Name</h2>
+    <h2 class="product-name text-grey-light">{{product.product_name}}</h2>
     <div class="nutriment-list">
       <h4 class="text-grey-light pt-3">Nutrients per 100gr</h4>
-      <div class="flex flex-wrap pt-3 text-grey-light">
-        <div class="w-1/2 p-1">
-          <span>Proteins</span>
-          <span>23g</span>
+      <div class="flex flex-wrap pt-3 text-grey-light fontsize">
+        <div
+          v-for=" (nutrient, index) in nutrients"
+          :key="index+100"
+          class="w-1/2 flex justify-between paddingNutrient"
+        >
+          <span>
+            <strong>{{nutrient.name}}</strong> :
+          </span>
+          <span>{{nutrient.value}} gr</span>
         </div>
       </div>
     </div>
 
     <div class="text-justify pt-5 pl-4">
       <h4 class="text-left">Allergens</h4>
-      <p
-        class="p-2 leading-normal"
-      >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-      <h4 class="text-left pt-3">Vitamins</h4>
-      <p
-        class="p-2 leading-normal"
-      >incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit</p>
-      <h4 class="text-left pt-3">Minerals</h4>
-      <p class="p-2 leading-normal">consectetur adipiscing elit, sed do eiusmod tempor</p>
+      <p class="p-2 leading-normal" v-for="(allergen, index) in allergers" :key="index+200">
+        <span v-if="allergers.length > 0">{{allergen}}</span>
+        <span v-else>Free of known allergens</span>
+      </p>
+      <h4 v-if="vitamins.length > 0" class="text-left pt-3">Vitamins</h4>
+      <p class="p-2 leading-normal" v-for="(vitamin, index) in vitamins" :key="index+300">
+        <span>{{vitamin}}</span>
+      </p>
+
+      <h4 v-if="minerals.length > 0" class="text-left pt-3">Minerals</h4>
+      <p class="p-2 leading-normal" v-for="(mineral, index) in minerals" :key="index+400">
+        <span>{{mineral}}</span>
+      </p>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  props: ["product"],
+  data() {
+    return {
+      bg: {
+        background: `linear-gradient(180deg, rgba(49, 50, 79, 0.17) 0%, #242539 100%), url(${
+          this.product.image_front_url
+        })`
+      },
+      nutrients: [],
+      allergers: [],
+      vitamins: [],
+      minerals: []
+    };
+  },
+  mounted() {
+    this.nutrients = this.$store.getters.getNutrientsBy100g;
+    this.allergers = this.$store.getters.getAllergens;
+    this.vitamins = this.$store.getters.getVitamins;
+    this.minerals = this.$store.getters.getMinerals;
+  }
+};
+</script>
+
 
 <style scoped>
 .z-index-minus100 {
@@ -64,9 +100,7 @@
   width: 100vw;
   height: 194px;
   left: 0px;
-  top: 0px;
-  background: linear-gradient(180deg, rgba(49, 50, 79, 0.17) 0%, #242539 100%),
-    url(https://tailwindcss.com/img/card-top.jpg);
+  top: -5px;
   background-size: cover;
   background-position: center center;
   border-radius: 5px;
@@ -74,7 +108,7 @@
 
 .nutriment-list {
   position: relative;
-  width: 80%;
+  width: 90%;
   height: auto;
   margin: auto;
   margin-top: -2rem;
@@ -83,5 +117,23 @@
   background: #3c444d;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  .fontsize {
+    font-size: 0.7rem;
+  }
+  .paddingNutrient {
+    padding: 0.05rem 0.6rem;
+  }
+}
+
+@media (min-width: 481px) {
+  .fontsize {
+    font-size: 1rem;
+  }
+  .paddingNutrient {
+    padding: 0.05rem 0.5rem;
+  }
 }
 </style>

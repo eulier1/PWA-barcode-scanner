@@ -1,8 +1,8 @@
 <template>
   <section class="container">
-    <appBackButton></appBackButton>
-    <appNutriScore></appNutriScore>
-    <appNutrimentDetail></appNutrimentDetail>
+    <appBackButton @back-to="$router.push('/')"></appBackButton>
+    <appNutriScore :nutritionGrade="product.nutrition_grades"></appNutriScore>
+    <appNutrimentDetail :product="product"></appNutrimentDetail>
   </section>
 </template>
 
@@ -18,6 +18,19 @@ export default {
     appNutriScore: NutriScore,
     appNutrimentDetail: NutrimentDetail,
     appError: Error
+  },
+  data() {
+    return {
+      product: {}
+    };
+  },
+  mounted() {
+    this.product = this.$store.state.product.product;
+  },
+  methods: {
+    test(ev) {
+      console.log(ev);
+    }
   }
 };
 </script>

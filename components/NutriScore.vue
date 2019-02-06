@@ -2,6 +2,7 @@
   <div>
     <!-- A score -->
     <svg
+      v-if="nutritionGrade === 'a'"
       class="nutri-score"
       width="163"
       height="41"
@@ -39,6 +40,7 @@
     <!-- A score end-->
     <!-- B score -->
     <svg
+      v-if="nutritionGrade === 'b'"
       class="nutri-score"
       width="163"
       height="41"
@@ -71,6 +73,7 @@
     <!-- B score End-->
     <!-- C score -->
     <svg
+      v-if="nutritionGrade === 'c'"
       class="nutri-score"
       width="163"
       height="41"
@@ -108,6 +111,7 @@
     <!-- C score End-->
     <!-- D score -->
     <svg
+      v-if="nutritionGrade === 'd'"
       class="nutri-score"
       width="163"
       height="41"
@@ -146,6 +150,7 @@
     <!-- D score End-->
     <!-- E score -->
     <svg
+      v-if="nutritionGrade === 'e'"
       class="nutri-score"
       width="163"
       height="41"
@@ -184,6 +189,13 @@
     <!-- E score End-->
   </div>
 </template>
+
+<script>
+export default {
+  props: ["nutritionGrade"]
+};
+</script>
+
 
 <style scoped>
 .nutri-score {
