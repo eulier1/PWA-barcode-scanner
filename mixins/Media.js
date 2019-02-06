@@ -3,9 +3,15 @@
     https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 */
 export const MEDIA = {
+  data() {
+    return {
+      isCameraActive: false
+    };
+  },
   methods: {
     initializeMedia(ElemRef) {
       console.log("initializeMedia", ElemRef);
+      let self = this;
       if (!"mediaDevices" in navigator) {
         navigator.mediaDevices = {};
       }
@@ -16,6 +22,7 @@ export const MEDIA = {
             navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
           if (!getUserMedia) {
+            self.isCameraActive = false;
             return Promise.reject(
               new Error("getUserMedia is not implemented in this browser")
             );
@@ -30,6 +37,7 @@ export const MEDIA = {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then(function(mediaStream) {
+          console.log(self);
           let video = ElemRef;
           video.srcObject = mediaStream;
           video.onloadedmetadata = function(e) {
@@ -38,6 +46,7 @@ export const MEDIA = {
         })
         .catch(function(err) {
           console.log(err.name + ": " + err.message);
+          self.isCameraActive = false;
         });
     }
   }
