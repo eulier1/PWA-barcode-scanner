@@ -111,8 +111,8 @@ export default {
           src: dataURIjpg //'/test/fixtures/code_128/image-001.jpg' or 'data:image/jpg;base64,' + data
         },
         function(result) {
-          self.initialState();
           if (!result) {
+            self.initialState();
             self.displayErrorAlert(
               self,
               `Couldn't detect the barcode, please try it again.`
