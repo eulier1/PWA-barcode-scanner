@@ -38,16 +38,22 @@
       >
       <span class="flex justify-center">
         <button
-          v-if="!isLoading"
+          v-if="isLoading === 'false'"
           class="btn-camera bg-blue hover:bg-blue-light text-white font-bold py-2 px-4 border-b-4 border-blue-dark hover:border-blue rounded z-50"
           @click="capture($event)"
         >
           <img src="../static/camera.svg" alt="camera-icon" width="25px">
         </button>
         <button
-          v-else
-          class="btn-camera bg-blue hover:bg-blue-light text-white font-bold py-2 px-4 border-b-4 border-blue-dark hover:border-blue rounded z-50"
+          v-if="isLoading === 'loading'"
+          class="btn-camera bg-grey hover:bg-grey-light text-white font-bold py-2 px-4 border-b-4 border-grey-dark hover:border-grey rounded z-50"
         >. . .</button>
+        <button
+          v-if="isLoading === 'done'"
+          class="btn-camera bg-green hover:bg-green-light text-white font-bold py-2 px-4 border-b-4 border-green-dark hover:green-blue rounded z-50"
+        >
+          <img src="../static/done.svg" alt="camera-icon" width="25px">
+        </button>
       </span>
 
       <div class="camera-wrapper" ref="camera">
@@ -71,6 +77,7 @@ import Quagga from "quagga";
 import { MEDIA } from "../mixins/Media";
 import Title from "@/components/Title.vue";
 import Error from "@/components/Error.vue";
+import { setInterval } from "timers";
 
 export default {
   components: {
@@ -81,23 +88,20 @@ export default {
     return {
       isSnapshot: false,
       isSnapshotTaken: false,
-      isLoading: false,
+      isLoading: "false",
       showError: false,
       errorMsg: ""
     };
   },
   mixins: [MEDIA],
-  mounted() {
-    //this.initializeMedia(this.$refs.player);
-  },
   methods: {
     initialState() {
       this.isSnapshot = false;
       this.isSnapshotTaken = false;
-      this.isLoading = false;
+      this.isLoading = "false";
     },
     capture(ev) {
-      this.isLoading = true;
+      this.isLoading = "loading";
       this.isSnapshot = true;
       let canvas = this.$refs.canvas;
       let context = this.$refs.canvas.getContext("2d");
@@ -105,7 +109,7 @@ export default {
       context.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
       //videoPlayer.srcObject.getVideoTracks().forEach(track => {});
       this.generateBarcode(canvas.toDataURL("image/jpeg", 1));
-      //this.goToProduct(); //"3700279305420"
+      //this.goToProduct("3560070955589"); //"3700279305420"
     },
     generateBarcode(dataURIjpg) {
       let self = this;
@@ -130,8 +134,7 @@ export default {
             );
           }
           if (result.codeResult) {
-            this.isSnapshotTaken = true;
-            self.goToProduct(result.codeResult.code, self);
+            self.goToProduct(result.codeResult.code);
           } else {
             self.initialState();
             self.displayErrorAlert(
@@ -144,11 +147,19 @@ export default {
       );
     },
     goToProduct(barcode) {
+      console.log(barcode);
       this.$store
         .dispatch("getProduct", barcode)
         .then(product => {
+          console.log(this.$store.state.product);
+          this.isLoading = "done";
+
           if (this.$store.state.product.status === 1) {
-            this.$router.push({ path: `/product` });
+            this.isSnapshotTaken = true;
+            let self = this;
+            setTimeout(() => {
+              self.$router.push({ path: `/product` });
+            }, 375);
           } else {
             this.initialState();
             this.displayErrorAlert(this, `Product not found`);

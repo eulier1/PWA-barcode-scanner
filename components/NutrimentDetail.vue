@@ -16,7 +16,7 @@
           <span>
             <strong>{{nutrient.name}}</strong> :
           </span>
-          <span>{{nutrient.value}} gr</span>
+          <span>{{nutrient.value}}</span>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@ export default {
 .nutriment-name {
   position: absolute;
   z-index: 10;
-  top: 7rem;
+  top: 6rem;
   left: 1.1rem;
 }
 

@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <svg
+      class="svg-error"
       :width="width"
       :height="height"
       viewBox="0 0 247 19"
@@ -54,9 +55,9 @@
         fill="#BCB7B7"
       ></path>
     </svg>
-    <h4>Please activate it, to start scanning.</h4>
+    <h4 class="error-description">Please activate it, to start scanning.</h4>
     <button
-      class="bg-blue hover:bg-blue-light text-white font-bold py-2 px-4 border-b-4 border-blue-dark hover:border-blue rounded"
+      class="btn-accept bg-blue hover:bg-blue-light text-white font-bold py-2 px-4 border-b-4 border-blue-dark hover:border-blue rounded"
       @click="$emit('activate-camera')"
     >OK</button>
   </section>
@@ -92,13 +93,15 @@ h4 {
   align-items: flex-start;
 }
 
-.container * {
+.container .svg-error,
+.container .error-description,
+.container {
   padding: 0 1rem;
   width: 100%;
   text-align: center;
 }
 
-.container button {
+.container .btn-accept {
   padding: 0.5rem;
   width: auto;
 }

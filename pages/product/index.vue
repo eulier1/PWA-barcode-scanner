@@ -21,27 +21,20 @@ export default {
     appNutrimentDetail: NutrimentDetail,
     appError: Error
   },
-  data() {
-    return {
-      product: {},
-      nutriments: {
-        product_name: "",
-        image_front_url: "",
-        nutrients: "",
-        allergers: "",
-        vitamins: "",
-        minerals: ""
-      }
-    };
-  },
-  mounted() {
-    this.product = this.$store.state.product.product;
-    this.nutriment.product_name = this.$store.state.product.product.product_name;
-    this.nutriment.image_front_url = this.$store.state.product.product.image_front_url;
-    this.nutriment.nutrients = this.$store.getters.getNutrientsBy100g;
-    this.nutriment.allergers = this.$store.getters.getAllergens;
-    this.nutriment.vitamins = this.$store.getters.getVitamins;
-    this.nutriment.minerals = this.$store.getters.getMinerals;
+  computed: {
+    product: function() {
+      return this.$store.state.product.product;
+    },
+    nutriment: function() {
+      return {
+        product_name: this.$store.state.product.product.product_name,
+        image_front_url: this.$store.state.product.product.image_front_url,
+        nutrients: this.$store.getters.getNutrientsBy100g,
+        allergers: this.$store.getters.getAllergens,
+        vitamins: this.$store.getters.getVitamins,
+        minerals: this.$store.getters.getMinerals
+      };
+    }
   }
 };
 </script>
