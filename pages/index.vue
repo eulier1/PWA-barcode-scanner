@@ -2,27 +2,10 @@
   <main>
     <section v-show="isCameraActive" class="bg-landingpage">
       <app-title class="px-4"></app-title>
-      <div v-if="showError" class="bg-orange-darkest text-center py-4 lg:px-4 relative z-50">
-        <div
-          class="p-2 bg-orange-darker items-center text-orange-lightest leading-none lg:rounded-full flex lg:inline-flex"
-          role="alert"
-        >
-          <span class="flex rounded-full bg-orange uppercase px-2 py-1 text-xs font-bold mr-3">!</span>
-          <span class="font-semibold mr-2 text-left flex-auto">{{errorMsg}}</span>
-          <svg
-            class="fill-current h-6 w-6 text-orange"
-            role="button"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            @click="showError = false"
-          >
-            <title>Close</title>
-            <path
-              d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
-            ></path>
-          </svg>
-        </div>
-      </div>
+
+      <transition name="slide-fade">
+        <appAlert v-if="showError" :msg="errorMsg" @click="showError = false"></appAlert>
+      </transition>
 
       <h4
         v-if="!showError"
@@ -75,12 +58,14 @@
 <script>
 import Quagga from "quagga";
 import { MEDIA } from "../mixins/Media";
+import Alert from "@/components/Alert.vue";
 import Title from "@/components/Title.vue";
 import Error from "@/components/Error.vue";
 import { setInterval } from "timers";
 
 export default {
   components: {
+    appAlert: Alert,
     appTitle: Title,
     appError: Error
   },
@@ -268,5 +253,17 @@ canvas {
   100% {
     opacity: 1;
   }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateY(-30px);
+  opacity: 0;
 }
 </style>
