@@ -59,5 +59,9 @@ module.exports = {
     port: 3000, // default: 3000
     host: "192.168.0.104", // default: localhost,
     timing: false
-  }
+  },
+  // PWA Nuxt Module
+  workbox: {},
+  meta: {},
+  icon: {}
 };

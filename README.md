@@ -3,7 +3,7 @@
 **Demo**
 https://festive-goldwasser-4a54e3.netlify.com/
 
-PWA barcode scanner made with ![love-icon](/static/love.png) using ![nuxt-icon](/static/icon.png)
+PWA barcode scanner made with ![love-icon](/static/love.png) using ![nuxt-icon](/static/nuxt.png)
 
 Inspired by
 
@@ -53,4 +53,4 @@ Detection depend on several variables and could be:
 - camera hardware
 - lighting condition
 - device network
-- product not store yet in the open food facts https://world.openfoodfacts.org/discover
+- product not stored yet in the open food facts https://world.openfoodfacts.org/discover
