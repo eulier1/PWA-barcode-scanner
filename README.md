@@ -13,7 +13,7 @@ And thanks to Open Food Facts
 
 - https://world.openfoodfacts.org/discover
 
-![demo pwa barcode scanner](https://media.giphy.com/media/jbKBWXkofVujyQuwpC/giphy.gif)
+![demo-pwa-barcode-scanner](https://media.giphy.com/media/jbKBWXkofVujyQuwpC/giphy.gif)
 
 # Screenshots
 
