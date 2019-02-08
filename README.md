@@ -45,3 +45,12 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 # Credits
 
 Barcode icon <div> made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+# Disclaimer
+
+Detection depend on several variables and could be:
+
+- camera hardware
+- lighting condition
+- device network
+- product not store yet in the open food facts https://world.openfoodfacts.org/discover
