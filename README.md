@@ -1,10 +1,31 @@
-# PWABarcodeScanner
+# PWA Barcode Scanner ![barcode-icon](/static/barcode.png)
 
-> pwa barcode scanner in Nuxt.js
+**Demo**
+https://festive-goldwasser-4a54e3.netlify.com/
+
+PWA barcode scanner made with ![love-icon](/static/love.png) using ![nuxt-icon](/static/icon.png)
+
+Inspired by
+
+- https://github.com/moigonzalez/pwa-barcode-scanner
+
+And thanks to Open Food Facts
+
+- https://world.openfoodfacts.org/discover
+
+![demo pwa barcode scanner](https://media.giphy.com/media/jbKBWXkofVujyQuwpC/giphy.gif)
+
+# Screenshots
+
+|                                                 |                                                 |                                                 |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| ![screenshot1](https://i.imgur.com/sVqHQP2.png) | ![screenshot2](https://i.imgur.com/Yj3QV6S.png) | ![screenshot1](https://i.imgur.com/W8fqAyH.png) |
+
+# Development
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
@@ -20,3 +41,7 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+# Credits
+
+Barcode icon <div> made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
