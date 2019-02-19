@@ -1,5 +1,7 @@
 # PWA Barcode Scanner ![barcode-icon](/static/barcode.png)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c4c93610-fbc9-4b1b-a259-e12fd3138db5/deploy-status)](https://app.netlify.com/sites/festive-goldwasser-4a54e3/deploys)
+
 **Demo**
 https://festive-goldwasser-4a54e3.netlify.com/
 
